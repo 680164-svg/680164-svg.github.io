@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pinterest Style Dark Theme</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background-color: #121212;
+      color: #fff;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background: #1e1e1e;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+    }
+
+    header h1 {
+      font-size: 1.2rem;
+      color: #e60023;
+      margin: 0;
+    }
+
+    header input {
+      background: #2a2a2a;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 20px;
+      color: #fff;
+      width: 200px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-gap: 15px;
+      padding: 20px;
+    }
+
+    .card {
+      background: #1e1e1e;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      display: block;
+    }
+
+    .card .info {
+      padding: 10px;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pinterest Dark</h1>
+    <input type="text" placeholder="ค้นหา...">
+  </header>
+
+  <div class="grid">
+    <div class="card">
+      <img src="https://picsum.photos/300/400?random=1" alt="Image 1">
+      <div class="info">ตัวอย่างรูปภาพ 1</div>
+    </div>
+    <div class="card">
+      <img src="https://picsum.photos/300/500?random=2" alt="Image 2">
+      <div class="info">ตัวอย่างรูปภาพ 2</div>
+    </div>
+    <div class="card">
+      <img src="https://picsum.photos/300/450?random=3" alt="Image 3">
+      <div class="info">ตัวอย่างรูปภาพ 3</div>
+    </div>
+    <div class="card">
+      <img src="https://picsum.photos/300/350?random=4" alt="Image 4">
+      <div class="info">ตัวอย่างรูปภาพ 4</div>
+    </div>
+    <div class="card">
+      <img src="https://picsum.photos/300/420?random=5" alt="Image 5">
+      <div class="info">ตัวอย่างรูปภาพ 5</div>
+    </div>
+  </div>
+</body>
+</html>
