@@ -1,102 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pinterest Style Dark Theme</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ร้านขาย iPhone แบบตัวอย่าง</title>
   <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background-color: #121212;
-      color: #fff;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      background: #1e1e1e;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      z-index: 10;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.6);
-    }
-
-    header h1 {
-      font-size: 1.2rem;
-      color: #e60023;
-      margin: 0;
-    }
-
-    header input {
-      background: #2a2a2a;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 20px;
-      color: #fff;
-      width: 200px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      grid-gap: 15px;
-      padding: 20px;
-    }
-
-    .card {
-      background: #1e1e1e;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-      transition: transform 0.2s;
-    }
-
-    .card:hover {
-      transform: scale(1.03);
-    }
-
-    .card img {
-      width: 100%;
-      display: block;
-    }
-
-    .card .info {
-      padding: 10px;
-      font-size: 0.9rem;
-      color: #ccc;
-    }
+    :root{--accent:#0ea5a4;--bg:#f7f7fb;--card:#ffffff;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, Roboto, "Helvetica Neue", Arial;background:var(--bg);color:#111}
+    header{background:linear-gradient(90deg,#06202a 0%, #0b3940 100%);color:white;padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#06b6d4,#0891b2);display:flex;align-items:center;justify-content:center;font-weight:700}
+    .search{max-width:480px;flex:1;margin:0 24px}
+    .search input{width:100%;padding:10px 14px;border-radius:8px;border:0}
+    .container{max-width:1100px;margin:28px auto;padding:0 16px}
+    .hero{display:flex;gap:20px;align-items:center;margin-bottom:20px}
+    .hero .left{flex:1}
+    .hero h1{margin:0;font-size:28px}
+    .hero p{color:var(--muted);margin-top:6px}
+    .products{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:12px}
+    .card{background:var(--card);border-radius:12px;padding:12px;box-shadow:0 6px 18px rgba(10,10,20,0.06);display:flex;flex-direction:column}
+    .thumb{height:160px;border-radius:10px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f1f5f9}
+    .thumb img{max-width:100%;max-height:100%}
+    .meta{padding-top:10px;display:flex;flex-direction:column;gap:6px}
+    .title{font-weight:600}
+    .price{color:var(--accent);font-weight:700}
+    .actions{margin-top:auto;display:flex;gap:8px}
+    button{cursor:pointer;border:0;padding:10px 12px;border-radius:8px}
+    .btn-primary{background:var(--accent);color:white}
+    .btn-ghost{background:transparent;border:1px solid #e6e9ef}
+    .cart-btn{background:#fff;color:#0b3940;padding:8px 12px;border-radius:8px;display:flex;gap:8px;align-items:center}
+    .cart-count{background:#ef4444;color:white;padding:4px 8px;border-radius:999px;font-size:12px}
+    /* cart drawer */
+    .cart-drawer{position:fixed;right:18px;top:78px;width:340px;max-height:78vh;background:white;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.15);overflow:auto;transform:translateY(-10px);opacity:0;pointer-events:none;transition:all .18s}
+    .cart-drawer.open{transform:translateY(0);opacity:1;pointer-events:auto}
+    .cart-header{padding:12px;border-bottom:1px solid #f1f1f4;display:flex;justify-content:space-between;align-items:center}
+    .cart-list{padding:12px;display:flex;flex-direction:column;gap:10px}
+    .cart-item{display:flex;gap:10px;align-items:center}
+    .cart-item img{width:56px;height:56px;object-fit:cover;border-radius:8px}
+    .totals{padding:12px;border-top:1px solid #f1f1f4}
+    @media(max-width:720px){header{flex-wrap:wrap}.search{order:3;width:100%;margin:12px 0}.hero{flex-direction:column;align-items:flex-start}}
   </style>
 </head>
 <body>
   <header>
-    <h1>Pinterest Dark</h1>
-    <input type="text" placeholder="ค้นหา...">
+    <div class="brand">
+      <div class="logo">iP</div>
+      <div>
+        <div style="font-weight:700">iPhone Shop (ตัวอย่าง)</div>
+        <div style="font-size:12px;color:#94a3b8">เว็บตัวอย่าง — ไม่ใช่ร้านจริง</div>
+      </div>
+    </div>
+    <div class="search">
+      <input id="searchInput" placeholder="ค้นหา iPhone รุ่น / สี / ความจุ..." />
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="cart-btn" id="openCartBtn">ตะกร้า <span id="cartCount" class="cart-count">0</span></button>
+    </div>
   </header>
 
-  <div class="grid">
-    <div class="card">
-      <img src="https://picsum.photos/300/400?random=1" alt="Image 1">
-      <div class="info">ตัวอย่างรูปภาพ 1</div>
+  <main class="container">
+    <section class="hero">
+      <div class="left">
+        <h1>iPhone ราคาพิเศษ — เลือกรุ่นที่คุณชอบ</h1>
+        <p>ตัวอย่างร้านขายโทรศัพท์ iPhone พร้อมฟังก์ชันเพิ่มลงตะกร้า ดูรายละเอียด และสรุปราคาง่าย ๆ</p>
+      </div>
+      <div style="min-width:220px;text-align:right">
+        <button class="btn-ghost" onclick="sortBy('price-asc')">เรียงราคาต่ำ→สูง</button>
+        <button class="btn-ghost" onclick="sortBy('price-desc')">เรียงราคาสูง→ต่ำ</button>
+      </div>
+    </section>
+
+    <section id="products" class="products"></section>
+  </main>
+
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-header">
+      <strong>ตะกร้าสินค้า</strong>
+      <button onclick="closeCart()">ปิด ✕</button>
     </div>
-    <div class="card">
-      <img src="https://picsum.photos/300/500?random=2" alt="Image 2">
-      <div class="info">ตัวอย่างรูปภาพ 2</div>
+    <div id="cartList" class="cart-list"></div>
+    <div class="totals">
+      <div style="display:flex;justify-content:space-between"><span>รวม</span><strong id="cartTotal">฿0</strong></div>
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <button class="btn-primary" style="flex:1" onclick="checkout()">ชำระเงิน</button>
+        <button class="btn-ghost" style="flex:1" onclick="clearCart()">ล้างตะกร้า</button>
+      </div>
     </div>
-    <div class="card">
-      <img src="https://picsum.photos/300/450?random=3" alt="Image 3">
-      <div class="info">ตัวอย่างรูปภาพ 3</div>
-    </div>
-    <div class="card">
-      <img src="https://picsum.photos/300/350?random=4" alt="Image 4">
-      <div class="info">ตัวอย่างรูปภาพ 4</div>
-    </div>
-    <div class="card">
-      <img src="https://picsum.photos/300/420?random=5" alt="Image 5">
-      <div class="info">ตัวอย่างรูปภาพ 5</div>
-    </div>
-  </div>
-</body>
-</html>
+  </aside>
+
+  <script>
+    const productsData = [
+      {id:1,title:'iPhone 15 Pro Max',price:51900,desc:'จอ 6.7\" A16, กล้องโปร, ความจุ 256GB',img:'https://images.unsplash.com/photo-1633099252922-5f1f4f1b6f3f?auto=format&fit=crop&w=800&q=60'},
+      {id:2,title:'iPhone 15 Pro',price:45900,desc:'จอ 6.1\" A16, น้ำหนักเบา, ความจุ 128GB',img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=60'},
+      {id:3,title:'iPhone 15',price:32900,desc:'จอ 6.1\" A15, กล้องคู่, ความจุ 128GB',img:'https://images.unsplash.com/photo-1510557880182-3de6d0c6f2d9?auto=format&fit=crop&w=800&q=60'},
+      {id:4,title:'iPhone SE (2024)',price:15900,desc:'ขนาดกะทัดรัด, ราคาประหยัด ความจุ 64GB',img:'https://images.unsplash.com/photo-1539883370675-81a8c4e0f9c2?auto=format&fit=crop&w=800&q=60'}
+    ];
+
+    let products = [...productsData];
+    const cart = {};
+
+    function formatTHB(n){return '฿'+n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,",");}
+
+    function renderProducts(list){
+      const container = document.getElementById('products');
+      container.innerHTML = '';
+      list.forEach(p=>{
+        const card = document.createElement('div'); card.className='card';
+        card.innerHTML = `
+          <div class="thumb"><img src="${p.img}" alt="${p.title}"></div>
+          <div class="meta">
+            <div class="title">${p.title}</div>
+            <div style="font-size:13px;color:var(--muted)">${p.desc}</div>
+            <div class="price">${formatTHB(p.price)}</div>
+            <div class="actions">
+              <button class="btn-primary" onclick="addToCart(${p.id})">เพิ่มลงตะกร้า</button>
+              <button class="btn-ghost" onclick="viewDetails(${p.id})">ดูรายละเอียด</button>
+            </div>
+          </div>`;
+        container.appendChild(card);
+      });
+    }
+
+    function addToCart(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      cart[id] = cart[id] ? {...cart[id], qty: cart[id].qty+1} : { ...p, qty:1 };
+      updateCartUI();
+      openCart();
+    }
+
+    function viewDetails(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return alert('ไม่พบสินค้า');
+      alert(`${p.title}\n${p.desc}\nราคา: ${formatTHB(p.price)}`);
+    }
+
+    function updateCartUI(){
+      const list = document.getElementById('cartList');
+      const countEl = document.getElementById('cartCount');
+      list.innerHTML = '';
+      const items = Object.values(cart);
+      let total = 0; let qty=0;
+      if(items.length===0){ list.innerHTML='<div style="padding:12px;color:var(--muted)">ตะกร้าว่าง</div>' }
+      items.forEach(it=>{
